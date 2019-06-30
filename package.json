@@ -16,10 +16,10 @@
     "jss": "latest",
     "ramda": "^0.26.1",
     "razzle": "2.4.1",
-    "react": "16.8.5",
-    "react-dom": "16.8.5",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-jss": "^8.6.1",
-    "react-router-dom": "5.0.0",
+    "react-router-dom": "^5.0.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "serialize-javascript": "latest"
