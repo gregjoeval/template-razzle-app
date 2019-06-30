@@ -5,13 +5,13 @@ import exampleThemeOptions from './example';
 import {mergeDeepRight} from 'ramda';
 
 const getThemeOptionsFromName = (themeName) => {
-  switch (themeName) {
-    case exampleThemeOptions.themeName:
-      return mergeDeepRight(defaultThemeOptions, exampleThemeOptions);
-    case defaultThemeOptions.themeName:
-    default:
-      return defaultThemeOptions;
-  }
+    switch (themeName) {
+        case exampleThemeOptions.themeName:
+            return mergeDeepRight(defaultThemeOptions, exampleThemeOptions);
+        case defaultThemeOptions.themeName:
+        default:
+            return defaultThemeOptions;
+    }
 };
 
 const getTheme = (options: Object) => createMuiTheme(options);

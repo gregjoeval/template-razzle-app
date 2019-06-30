@@ -1,18 +1,17 @@
 import App from './App';
 import React from 'react';
-import { StaticRouter } from 'react-router-dom';
+import {StaticRouter} from 'react-router-dom';
 import express from 'express';
-import { renderToString } from 'react-dom/server';
-import {CssBaseline, MuiThemeProvider, createGenerateClassName} from "@material-ui/core";
-import {SheetsRegistry, JssProvider } from "react-jss";
-import {getThemeFromName} from "./themes";
-import serialize from 'serialize-javascript';
-import {THEMES} from "./constants";
+import ReactDomServer from 'react-dom/server';
+import {CssBaseline, MuiThemeProvider, createGenerateClassName} from '@material-ui/core';
+import {SheetsRegistry, JssProvider} from 'react-jss';
+import {getThemeFromName} from './themes';
+import {THEMES} from './constants';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
 const renderFullPage = (html, css) =>
- `<!doctype html>
+    `<!doctype html>
   <html lang="">
     <head>
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -25,20 +24,20 @@ const renderFullPage = (html, css) =>
       <link rel="manifest" href="../public/site.webmanifest">
       <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500">
       ${
-        assets.client.css
-          ? `<link rel="stylesheet" href="${assets.client.css}">`
-          : ''
-      }
+    assets.client.css
+        ? `<link rel="stylesheet" href="${assets.client.css}">`
+        : ''
+}
       ${
-        css
-          ? `<style id='jss-server-side'>${css}</style>`
-          : ''
-      }
+    css
+        ? `<style id='jss-server-side'>${css}</style>`
+        : ''
+}
       ${
-        process.env.NODE_ENV === 'production'
-          ? `<script src="${assets.client.js}" defer></script>`
-          : `<script src="${assets.client.js}" defer crossorigin></script>`
-      }
+    process.env.NODE_ENV === 'production'
+        ? `<script src="${assets.client.js}" defer></script>`
+        : `<script src="${assets.client.js}" defer crossorigin></script>`
+}
     </head>
     <body>
       <div id="root">${html}</div>
@@ -46,45 +45,54 @@ const renderFullPage = (html, css) =>
   </html>`;
 
 function handleRender(req, res) {
-  
-  // This is needed in order to deduplicate the injection of CSS in the page.
-  const sheetsManager = new WeakMap();
-  
-  // This is needed in order to inject the critical CSS.
-  const sheetsRegistry = new SheetsRegistry();
-  
-  // Create a theme instance.
-  const theme = getThemeFromName(THEMES.DEFAULT);
-  
-  // Create a new class name generator.
-  const generateClassName = createGenerateClassName();
-  
-  let context = {};
-  const html = renderToString(
-    <StaticRouter context={context} location={req.url}>
-      <JssProvider registry={sheetsRegistry} generateClassName={generateClassName}>
-        <MuiThemeProvider sheetsManager={sheetsManager} theme={theme}>
-          <CssBaseline>
-            <App />
-          </CssBaseline>
-        </MuiThemeProvider>
-      </JssProvider>
-    </StaticRouter>
-  );
-  
-  const css = sheetsRegistry.toString();
-  
-  if (context.url) {
-    res.redirect(context.url);
-  } else {
-    res.status(200).send(renderFullPage(html, css));
-  }
+
+    // This is needed in order to deduplicate the injection of CSS in the page.
+    const sheetsManager = new WeakMap();
+
+    // This is needed in order to inject the critical CSS.
+    const sheetsRegistry = new SheetsRegistry();
+
+    // Create a theme instance.
+    const theme = getThemeFromName(THEMES.DEFAULT);
+
+    // Create a new class name generator.
+    const generateClassName = createGenerateClassName();
+
+    const context = {};
+    const html = ReactDomServer.renderToString(
+        <StaticRouter
+            context={context}
+            location={req.url}
+        >
+            <JssProvider
+                generateClassName={generateClassName}
+                registry={sheetsRegistry}
+            >
+                <MuiThemeProvider
+                    sheetsManager={sheetsManager}
+                    theme={theme}
+                >
+                    <CssBaseline>
+                        <App />
+                    </CssBaseline>
+                </MuiThemeProvider>
+            </JssProvider>
+        </StaticRouter>
+    );
+
+    const css = sheetsRegistry.toString();
+
+    if (context.url) {
+        res.redirect(context.url);
+    } else {
+        res.status(200).send(renderFullPage(html, css));
+    }
 }
 
 const server = express();
 server
-  .disable('x-powered-by')
-  .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
-  .use(handleRender);
+    .disable('x-powered-by')
+    .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
+    .use(handleRender);
 
 export default server;
