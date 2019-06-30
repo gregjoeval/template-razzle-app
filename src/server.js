@@ -42,9 +42,6 @@ const renderFullPage = (html, css) =>
     </head>
     <body>
       <div id="root">${html}</div>
-      <script>
-        window.__PRELOADED_STATE__ = ${serialize(finalState)}
-      </script>
     </body>
   </html>`;
 
@@ -62,7 +59,7 @@ function handleRender(req, res) {
   // Create a new class name generator.
   const generateClassName = createGenerateClassName();
   
-  const context = {};
+  let context = {};
   const html = renderToString(
     <StaticRouter context={context} location={req.url}>
       <JssProvider registry={sheetsRegistry} generateClassName={generateClassName}>
