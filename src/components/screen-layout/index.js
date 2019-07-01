@@ -1,6 +1,6 @@
 // @flow
 import React, {Component, Fragment} from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
+import withStyles from '@material-ui/styles/withStyles';
 import {AppBar} from '@material-ui/core';
 import type ToolBar from '@material-ui/core/Toolbar';
 import SectionLayout from '../section-layout';
@@ -73,29 +73,29 @@ const styles = theme => ({
         zIndex: 2
     },
     hasHeaderOrFooter: {
-        paddingTop: theme.spacing.unit * 9,
-        paddingBottom: theme.spacing.unit * 9
+        paddingTop: theme.spacing(9),
+        paddingBottom: theme.spacing(9)
     },
     screenPadding: {
         [theme.breakpoints.up('xs')]: {
-            paddingTop: theme.spacing.unit * 3,
-            paddingBottom: theme.spacing.unit * 3
+            paddingTop: theme.spacing(3),
+            paddingBottom: theme.spacing(3)
         },
         [theme.breakpoints.up('sm')]: {
-            paddingTop: theme.spacing.unit * 5,
-            paddingBottom: theme.spacing.unit * 5
+            paddingTop: theme.spacing(5),
+            paddingBottom: theme.spacing(5)
         },
         [theme.breakpoints.up('md')]: {
-            paddingTop: theme.spacing.unit * 7,
-            paddingBottom: theme.spacing.unit * 7
+            paddingTop: theme.spacing(7),
+            paddingBottom: theme.spacing(7)
         },
         [theme.breakpoints.up('lg')]: {
-            paddingTop: theme.spacing.unit * 9,
-            paddingBottom: theme.spacing.unit * 9
+            paddingTop: theme.spacing(9),
+            paddingBottom: theme.spacing(9)
         },
         [theme.breakpoints.up('xl')]: {
-            paddingTop: theme.spacing.unit * 11,
-            paddingBottom: theme.spacing.unit * 11
+            paddingTop: theme.spacing(11),
+            paddingBottom: theme.spacing(11)
         }
     },
     header: {
@@ -103,8 +103,8 @@ const styles = theme => ({
         bottom: 'auto',
         backgroundColor: theme.palette.background.paper,
         [theme.breakpoints.up('xs')]: {
-            paddingTop: theme.spacing.unit * 0.5,
-            paddingBottom: theme.spacing.unit * 0.5
+            paddingTop: theme.spacing(0.5),
+            paddingBottom: theme.spacing(0.5)
         }
     },
     footer: {
@@ -112,8 +112,8 @@ const styles = theme => ({
         bottom: 0,
         backgroundColor: theme.palette.background.paper,
         [theme.breakpoints.up('xs')]: {
-            paddingTop: theme.spacing.unit * 0.5,
-            paddingBottom: theme.spacing.unit * 0.5
+            paddingTop: theme.spacing(0.5),
+            paddingBottom: theme.spacing(0.5)
         }
     }
 });

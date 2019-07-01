@@ -1,7 +1,7 @@
 // @flow
 import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
-import withStyles from '@material-ui/core/styles/withStyles';
+import withStyles from '@material-ui/styles/withStyles';
 
 const handleSpacing = input => {
     switch (input) {
@@ -10,19 +10,19 @@ const handleSpacing = input => {
             return 0;
         case 1:
         case 8:
-            return 8;
+            return 1;
         case 2:
         case 16:
-            return 16;
+            return 2;
         case 3:
         case 24:
-            return 24;
+            return 3;
         case 4:
         case 32:
-            return 32;
+            return 4;
         case 5:
         case 40:
-            return 40;
+            return 5;
     }
 };
 
@@ -99,16 +99,16 @@ const styles = (theme) => ({
     breakpointSpacing: {
         marginBottom: 0,
         [theme.breakpoints.up('sm')]: {
-            marginBottom: theme.spacing.unit * 1
+            marginBottom: theme.spacing(1)
         },
         [theme.breakpoints.up('md')]: {
-            marginBottom: theme.spacing.unit * 2
+            marginBottom: theme.spacing(2)
         },
         [theme.breakpoints.up('lg')]: {
-            marginBottom: theme.spacing.unit * 2.5
+            marginBottom: theme.spacing(2.5)
         },
         [theme.breakpoints.up('xl')]: {
-            marginBottom: theme.spacing.unit * 3
+            marginBottom: theme.spacing(3)
         }
     }
 });

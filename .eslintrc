@@ -1,7 +1,4 @@
 {
-  "extends": [
-    "react-app"
-  ],
   "globals": {
     "module": true,
     "Reflect": true
@@ -17,8 +14,9 @@
   "parser": "babel-eslint",
   "plugins": [
     "babel",
-    "react",
-    "jsx-a11y"
+    "flowtype",
+    "jsx-a11y",
+    "react"
   ],
   "rules": {
     "jsx-a11y/href-no-hash": 0,

@@ -21,7 +21,10 @@ const Home = () => {
             alignItems={'center'}
             justify={'space-between'}
         >
-            <Typography variant={'h5'}>
+            <Typography
+                color={'textPrimary'}
+                variant={'h5'}
+            >
                 {'Title'}
             </Typography>
             <IconButton
@@ -31,9 +34,10 @@ const Home = () => {
                     setThemeId(newThemeId);
                 }}
             >
-                {themeId === THEMES.DEFAULT
-                    ? <LightThemeIcon/>
-                    : <DarkThemeIcon/>
+                {
+                    themeId === THEMES.DEFAULT
+                        ? <LightThemeIcon color={'action'}/>
+                        : <DarkThemeIcon color={'action'}/>
                 }
             </IconButton>
         </Header>
