@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react';
+import {Typography, IconButton} from '@material-ui/core';
+import {Brightness2 as DarkThemeIcon, Brightness5 as LightThemeIcon} from '@material-ui/icons';
 import ScreenLayout from '../../components/screen-layout';
 import ContentLayout from '../../components/content-layout';
-import Typography from '@material-ui/core/Typography';
 import Header from '../../components/header';
-import IconButton from '@material-ui/core/IconButton';
-import DarkThemeIcon from '@material-ui/icons/Brightness2';
-import LightThemeIcon from '@material-ui/icons/Brightness5';
 import {STORAGE_KEYS, THEMES} from '../../constants';
 
 const Home = () => {
