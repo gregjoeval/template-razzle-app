@@ -15,6 +15,9 @@ if (module.hot) {
 }
 
 const port = process.env.PORT || 3000;
+const host = process.env.HOST || '0.0.0.0';
+const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+const url = `${protocol}://${host}:${port}`;
 
 export default express()
     .use((req, res) => app.handle(req, res))
@@ -23,5 +26,5 @@ export default express()
             console.error(err);
             return;
         }
-        console.log(`> Started on port ${port}`);
+        console.log(`> Started on ${url}`);
     });
