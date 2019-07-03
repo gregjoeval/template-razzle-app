@@ -50,8 +50,8 @@ const SectionLayout = (
 
 const styles = (theme) => ({
     section: {
-        paddingLeft: theme.spacing.unit * 2,
-        paddingRight: theme.spacing.unit * 2
+        paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(2)
     }
 });
 

@@ -49,9 +49,6 @@ const renderFullPage = (html, css) =>
 
 const handleRender = (req, res) => {
 
-    // This is needed in order to deduplicate the injection of CSS in the page.
-    const sheetsManager = new WeakMap();
-
     // This is needed in order to inject the critical CSS.
     const sheets = new ServerStyleSheets();
 
@@ -66,7 +63,6 @@ const handleRender = (req, res) => {
                 location={req.url}
             >
                 <ThemeProvider
-                    sheetsManager={sheetsManager}
                     theme={theme}
                 >
                     <CssBaseline>
