@@ -7,23 +7,28 @@ import {ThemeProvider, ServerStyleSheets} from '@material-ui/styles';
 import {getThemeFromName} from './themes';
 import {THEMES} from './constants';
 import App from './App';
+import favicon from '../public/favicon.ico';
+import favicon16 from '../public/favicon-16x16.png';
+import favicon32 from '../public/favicon-32x32.png';
+import appleTouchIcon from '../public/apple-touch-icon.png';
+import webmanifest from '../public/site.webmanifest';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
 /* eslint-disable */
-const renderFullPage = (html, css) =>
- `<!doctype html>
-  <html lang="">
+const renderFullPage = (html, css) => `
+  <!doctype html>
+  <html lang="en">
     <head>
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta charset="utf-8" />
       <title>Superb Owl</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="apple-touch-icon" sizes="180x180" href="../public/apple-touch-icon.png">
-      <link rel="icon" type="image/png" sizes="32x32" href="../public/favicon-32x32.png">
-      <link rel="icon" type="image/png" sizes="16x16" href="../public/favicon-16x16.png">
-      <link rel="icon" href="../public/favicon.ico">
-      <link rel="manifest" href="../public/site.webmanifest">
+      <link rel="apple-touch-icon" sizes="180x180" href="${appleTouchIcon}">
+      <link rel="shorcut icon" type="image/png" sizes="32x32" href="${favicon32}">
+      <link rel="shorcut icon" type="image/png" sizes="16x16" href="${favicon16}">
+      <link rel="shorcut icon" type="image/ico" href="${favicon}">
+      <link rel="manifest" href="${webmanifest}">
       <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500">
       ${
         assets.client.css
@@ -44,7 +49,8 @@ const renderFullPage = (html, css) =>
     <body>
       <div id="root">${html}</div>
     </body>
-  </html>`;
+  </html>
+`;
 /* eslint-enable */
 
 const handleRender = (req, res) => {
