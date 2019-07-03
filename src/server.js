@@ -11,7 +11,7 @@ import favicon from '../public/favicon.ico';
 import favicon16 from '../public/favicon-16x16.png';
 import favicon32 from '../public/favicon-32x32.png';
 import appleTouchIcon from '../public/apple-touch-icon.png';
-import webmanifest from '../public/webmanifest.json';
+import manifest from '../public/manifest.json';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
@@ -28,7 +28,7 @@ const renderFullPage = (html, css) => `
       <link rel="shorcut icon" type="image/png" sizes="32x32" href="${favicon32}">
       <link rel="shorcut icon" type="image/png" sizes="16x16" href="${favicon16}">
       <link rel="shorcut icon" type="image/ico" href="${favicon}">
-      <link rel="manifest" href="${webmanifest}">
+      <!--<link rel="manifest" href="${manifest}">-->
       <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500">
       ${
         assets.client.css
