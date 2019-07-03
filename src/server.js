@@ -11,7 +11,7 @@ import favicon from '../public/favicon.ico';
 import favicon16 from '../public/favicon-16x16.png';
 import favicon32 from '../public/favicon-32x32.png';
 import appleTouchIcon from '../public/apple-touch-icon.png';
-import webmanifest from '../public/site.webmanifest';
+import webmanifest from '../public/webmanifest.json';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
