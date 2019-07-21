@@ -1,12 +1,12 @@
-import {THEMES} from '../constants';
+import {THEME} from '../constants';
 import primary from '@material-ui/core/colors/purple';
 import secondary from '@material-ui/core/colors/green';
 import error from '@material-ui/core/colors/orange';
 
 const options = {
-    themeName: THEMES.EXAMPLE,
+    themeName: THEME.EXAMPLE_ID,
     palette: {
-        type: 'dark',
+        type: THEME.DARK,
         primary: {
             main: primary['500']
         },

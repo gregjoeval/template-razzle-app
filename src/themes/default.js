@@ -1,14 +1,15 @@
 import primary from '@material-ui/core/colors/blue';
 import secondary from '@material-ui/core/colors/green';
 import error from '@material-ui/core/colors/red';
-import {THEMES} from '../constants';
+import {THEME} from '../constants';
 
 const options = {
-    themeName: THEMES.DEFAULT,
+    themeName: THEME.DEFAULT_ID,
     typography: {
         useNextVariants: true
     },
     palette: {
+        type: THEME.LIGHT,
         primary: {
             main: primary['500']
         },

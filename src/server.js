@@ -1,11 +1,11 @@
 import express from 'express';
 import React from 'react';
+import {Provider} from 'react-redux';
 import {StaticRouter} from 'react-router-dom';
 import ReactDomServer from 'react-dom/server';
-import {CssBaseline} from '@material-ui/core';
-import {ThemeProvider, ServerStyleSheets} from '@material-ui/styles';
-import {getThemeFromName} from './themes';
-import {THEMES} from './constants';
+import {ServerStyleSheets} from '@material-ui/styles';
+import AppThemeProvider from './components/app-theme-provider';
+import configureStore from './store/configure-store';
 import App from './App';
 import favicon from '../public/favicon.ico';
 import favicon16 from '../public/favicon-16x16.png';
@@ -16,7 +16,7 @@ import manifest from '../public/manifest.json';
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
 /* eslint-disable */
-const renderFullPage = (html, css) => `
+const renderFullPage = (html, css, preloadedState) => (`
   <!doctype html>
   <html lang="en">
     <head>
@@ -48,18 +48,24 @@ const renderFullPage = (html, css) => `
     </head>
     <body>
       <div id="root">${html}</div>
+      <script>
+        // WARNING: See the following for security issues around embedding JSON in HTML:
+        // http://redux.js.org/recipes/ServerRendering.html#security-considerations
+        window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\\u003c')}
+      </script>
     </body>
   </html>
-`;
+`);
 /* eslint-enable */
 
 const handleRender = (req, res) => {
 
+    // Create a new Redux store instance
+    const initialState = {};
+    const store = configureStore(initialState);
+
     // This is needed in order to inject the critical CSS.
     const sheets = new ServerStyleSheets();
-
-    // Create a theme instance.
-    const theme = getThemeFromName(THEMES.DEFAULT);
 
     const context = {};
     const html = ReactDomServer.renderToString(
@@ -68,13 +74,11 @@ const handleRender = (req, res) => {
                 context={context}
                 location={req.url}
             >
-                <ThemeProvider
-                    theme={theme}
-                >
-                    <CssBaseline>
+                <Provider store={store}>
+                    <AppThemeProvider>
                         <App />
-                    </CssBaseline>
-                </ThemeProvider>
+                    </AppThemeProvider>
+                </Provider>
             </StaticRouter>
         )
     );
@@ -83,7 +87,8 @@ const handleRender = (req, res) => {
         res.redirect(context.url);
     } else {
         const css = sheets.toString();
-        const renderedPage = renderFullPage(html, css);
+        const preloadedState = store.getState();
+        const renderedPage = renderFullPage(html, css, preloadedState);
         res.status(200).send(renderedPage);
     }
 };

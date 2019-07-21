@@ -1,1 +1,1 @@
-export const THEME_ID = 'THEME_ID';
+export const THEME_KEY = 'THEME_KEY';

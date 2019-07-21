@@ -1,28 +1,13 @@
 import React from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 import {Link, Typography} from '@material-ui/core';
+import AppHeader from '../../components/app-header';
 import ScreenLayout from '../../components/screen-layout';
 import ContentLayout from '../../components/content-layout';
-import Header from '../../components/header';
-
-const header = (
-    <Header
-        alignItems={'center'}
-        justify={'space-between'}
-    >
-        <Typography
-            color={'textPrimary'}
-            variant={'h5'}
-        >
-            {'Title'}
-        </Typography>
-        <div/>
-    </Header>
-);
 
 const NotFound = () => (
     <ScreenLayout
-        header={header}
+        header={<AppHeader/>}
     >
         <ContentLayout
             enableBreakpointSpacing={true}

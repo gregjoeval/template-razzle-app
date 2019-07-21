@@ -18,4 +18,4 @@ const getTheme = (options: Object) => createMuiTheme(options);
 
 export const getThemeFromName = (themeName: string) => getTheme(getThemeOptionsFromName(themeName));
 
-export const getThemeFromNameWithChanges = (themeName: string, options: Object) => getTheme(mergeDeepRight(getThemeOptionsFromName(themeName), options));
+export const getThemeFromIdWithChanges = (themeName: string, options: Object) => getTheme(mergeDeepRight(getThemeOptionsFromName(themeName), options));

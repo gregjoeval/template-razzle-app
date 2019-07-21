@@ -2,29 +2,29 @@ import 'react-app-polyfill/ie9'; // For IE 9-11 support
 import 'react-app-polyfill/ie11'; // For IE 11 support
 import React from 'react';
 import {hydrate} from 'react-dom';
+import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
-import {CssBaseline} from '@material-ui/core';
-import {ThemeProvider} from '@material-ui/styles';
-import {getThemeFromName} from './themes';
-import {STORAGE_KEYS, THEMES} from './constants';
+import AppThemeProvider from './components/app-theme-provider';
+import configureStore from './store/configure-store';
 import App from './App';
 
-const themeIdStorage = window.localStorage.getItem(STORAGE_KEYS.THEME_ID);
-const themeId = themeIdStorage || THEMES.DEFAULT;
+// Grab the state from a global variable injected into the server-generated HTML
+const preloadedState = window.__PRELOADED_STATE__;
+// Allow the passed state to be garbage-collected
+Reflect.deleteProperty(window, '__PRELOADED_STATE__');
+// Create Redux store with initial state
+const store = configureStore(preloadedState);
 
-if (!themeIdStorage || themeIdStorage !== themeId) {
-    window.localStorage.setItem(STORAGE_KEYS.THEME_ID, themeId);
-}
-
-const theme = getThemeFromName(themeId);
+// need to update state
+window.__PRELOADED_STATE__ = preloadedState;
 
 hydrate(
     <BrowserRouter>
-        <ThemeProvider theme={theme}>
-            <CssBaseline>
+        <Provider store={store}>
+            <AppThemeProvider>
                 <App />
-            </CssBaseline>
-        </ThemeProvider>
+            </AppThemeProvider>
+        </Provider>
     </BrowserRouter>,
     document.getElementById('root'),
     () => {
