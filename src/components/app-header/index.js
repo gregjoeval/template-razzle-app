@@ -8,17 +8,13 @@ import Header from '../../components/header';
 import {THEME} from '../../constants';
 import ContentLayout from '../content-layout';
 
-const mapStateToProps = state => {
-    console.log('state');
-    console.log(state);
-    return ({
-        id: state.theme.id,
-        type: state.theme.palette.type
-    });
-}
+const mapStateToProps = state => ({
+    id: state.theme.id,
+    type: state.theme.palette.type
+});
 
 const mapDispatchToProps = dispatch => ({
-    themeActions: bindActionCreators({...ThemeActions}, dispatch)
+    themeActions: bindActionCreators(ThemeActions, dispatch)
 });
 
 type Props = {
@@ -31,14 +27,7 @@ const AppHeader = ({themeActions, id, type}: Props) => {
     const {setThemeId, setLightTheme, setDarkTheme} = themeActions;
 
     const isLightTheme = type === THEME.LIGHT;
-    const toggleThemeType = () => {
-        if (isLightTheme) {
-            console.log('attempting to set dark theme');
-            setDarkTheme();
-        } else {
-            setLightTheme();
-        }
-    };
+    const toggleThemeType = isLightTheme ? setDarkTheme : setLightTheme;
 
     return (
         <Header
