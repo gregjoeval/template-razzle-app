@@ -14,7 +14,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    themeActions: bindActionCreators(ThemeActions, dispatch)
+    themeActions: bindActionCreators({...ThemeActions}, dispatch)
 });
 
 type Props = {
@@ -27,7 +27,14 @@ const AppHeader = ({themeActions, id, type}: Props) => {
     const {setThemeId, setLightTheme, setDarkTheme} = themeActions;
 
     const isLightTheme = type === THEME.LIGHT;
-    const toggleThemeType = isLightTheme ? setDarkTheme : setLightTheme;
+    const toggleThemeType = () => {
+        if (isLightTheme) {
+            console.log('attempting to set dark theme');
+            setDarkTheme();
+        } else {
+            setLightTheme();
+        }
+    };
 
     return (
         <Header

@@ -5,6 +5,7 @@ import {StaticRouter} from 'react-router-dom';
 import ReactDomServer from 'react-dom/server';
 import {ServerStyleSheets} from '@material-ui/styles';
 import AppThemeProvider from './components/app-theme-provider';
+import {THEME} from './constants';
 import configureStore from './store/configure-store';
 import App from './App';
 import favicon from '../public/favicon.ico';
@@ -61,7 +62,7 @@ const renderFullPage = (html, css, preloadedState) => (`
 const handleRender = (req, res) => {
 
     // Create a new Redux store instance
-    const initialState = {};
+    const initialState = {theme: {id: THEME.DEFAULT_ID, palette: {type: THEME.LIGHT}}};
     const store = configureStore(initialState);
 
     // This is needed in order to inject the critical CSS.
