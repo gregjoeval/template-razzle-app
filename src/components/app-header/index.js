@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 type Props = {
-    themeActions: Object,
+    themeActions: {setThemeId: any => void, setLightTheme: any => void, setDarkTheme: any => void},
     id: string,
     type: string
 };
@@ -40,6 +40,12 @@ const AppHeader = ({themeActions, id, type}: Props) => {
             >
                 {'Title'}
             </Typography>
+            <Typography
+                color={'textPrimary'}
+                variant={'h5'}
+            >
+                {type}
+            </Typography>
             <ContentLayout
                 direction={'row'}
             >
@@ -55,7 +61,7 @@ const AppHeader = ({themeActions, id, type}: Props) => {
                 </IconButton>
                 <IconButton
                     href={null}
-                    onClick={() => null}
+                    onClick={() => console.log('hello')}
                 >
                     <PaletteIcon/>
                 </IconButton>
