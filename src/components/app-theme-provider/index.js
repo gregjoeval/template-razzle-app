@@ -20,6 +20,7 @@ const AppThemeProvider = ({children, theme}: Props): Component => {
     const [currentTheme, setCurrentTheme] = useState(themeDefaults);
 
     useEffect(() => {
+        console.log('in the use effect');
         const diffs = R.difference([theme], [currentTheme]);
         if (theme && diffs.length > 0) {
             console.log(diffs);

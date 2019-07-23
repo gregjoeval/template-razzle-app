@@ -41,7 +41,7 @@
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "serialize-javascript": "latest",
+    "serialize-javascript": "^1.7.0",
     "terser": "^4.0.0"
   },
   "devDependencies": {

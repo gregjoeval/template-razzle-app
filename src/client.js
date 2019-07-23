@@ -28,7 +28,7 @@ hydrate(
     </BrowserRouter>,
     document.getElementById('root'),
     () => {
-    // [ReHydratation](https://github.com/cssinjs/jss/blob/master/docs/ssr.md)
+        // [ReHydratation](https://github.com/cssinjs/jss/blob/master/docs/ssr.md)
         const jssStyles = document.getElementById('jss-server-side');
         if (jssStyles && jssStyles.parentNode) { jssStyles.parentNode.removeChild(jssStyles); }
     }

@@ -5,7 +5,6 @@ import {StaticRouter} from 'react-router-dom';
 import ReactDomServer from 'react-dom/server';
 import {ServerStyleSheets} from '@material-ui/styles';
 import AppThemeProvider from './components/app-theme-provider';
-import {THEME} from './constants';
 import configureStore from './store/configure-store';
 import App from './App';
 import favicon from '../public/favicon.ico';
@@ -13,6 +12,7 @@ import favicon16 from '../public/favicon-16x16.png';
 import favicon32 from '../public/favicon-32x32.png';
 import appleTouchIcon from '../public/apple-touch-icon.png';
 import manifest from '../public/manifest.json';
+import serialize from 'serialize-javascript';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
@@ -50,9 +50,7 @@ const renderFullPage = (html, css, preloadedState) => (`
     <body>
       <div id="root">${html}</div>
       <script>
-        // WARNING: See the following for security issues around embedding JSON in HTML:
-        // http://redux.js.org/recipes/ServerRendering.html#security-considerations
-        window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\\u003c')}
+        window.__PRELOADED_STATE__ = ${serialize(preloadedState)}
       </script>
     </body>
   </html>
@@ -62,7 +60,7 @@ const renderFullPage = (html, css, preloadedState) => (`
 const handleRender = (req, res) => {
 
     // Create a new Redux store instance
-    const initialState = {theme: {id: THEME.DEFAULT_ID, palette: {type: THEME.LIGHT}}};
+    const initialState = {};
     const store = configureStore(initialState);
 
     // This is needed in order to inject the critical CSS.
