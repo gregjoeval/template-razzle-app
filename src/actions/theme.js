@@ -11,7 +11,10 @@ export const setLightTheme = () => ({
     payload: THEME.LIGHT
 });
 
-export const setDarkTheme = () => ({
-    type: THEME_TYPE__SET,
-    payload: THEME.DARK
-});
+export const setDarkTheme = () => {
+    console.log('setDarkTheme!');
+    return ({
+        type: THEME_TYPE__SET,
+        payload: THEME.DARK
+    });
+};
