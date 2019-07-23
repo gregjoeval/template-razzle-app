@@ -40,12 +40,6 @@ const AppHeader = ({themeActions, id, type}: Props) => {
             >
                 {'Title'}
             </Typography>
-            <Typography
-                color={'textPrimary'}
-                variant={'h5'}
-            >
-                {type}
-            </Typography>
             <ContentLayout
                 direction={'row'}
             >
