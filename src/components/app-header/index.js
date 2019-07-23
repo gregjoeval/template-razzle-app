@@ -8,10 +8,14 @@ import Header from '../../components/header';
 import {THEME} from '../../constants';
 import ContentLayout from '../content-layout';
 
-const mapStateToProps = state => ({
-    id: state.theme.id,
-    type: state.theme.palette.type
-});
+const mapStateToProps = state => {
+    console.log('state');
+    console.log(state);
+    return ({
+        id: state.theme.id,
+        type: state.theme.palette.type
+    });
+}
 
 const mapDispatchToProps = dispatch => ({
     themeActions: bindActionCreators({...ThemeActions}, dispatch)

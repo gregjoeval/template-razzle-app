@@ -4,7 +4,7 @@ import rootReducer from '../reducers';
 import * as R from 'ramda';
 
 const logger = store => next => action => {
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development' || true) {
         // eslint-disable-next-line no-console
         console.log('dispatching', action);
         // eslint-disable-next-line prefer-reflect
@@ -18,7 +18,7 @@ const logger = store => next => action => {
 };
 
 const crashReporter = () => next => action => {
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development' || true) {
         try {
             return next(action);
         } catch (err) {
