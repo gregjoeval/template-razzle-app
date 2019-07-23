@@ -1,4 +1,4 @@
-import {Brightness2 as DarkThemeIcon, Brightness6 as LightThemeIcon} from '@material-ui/icons';
+import {Brightness2 as DarkThemeIcon, Brightness6 as LightThemeIcon, Palette as PaletteIcon} from '@material-ui/icons';
 import React from 'react';
 import {IconButton, Typography} from '@material-ui/core';
 import {connect} from 'react-redux';
@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux';
 import {ThemeActions} from '../../actions';
 import Header from '../../components/header';
 import {THEME} from '../../constants';
+import ContentLayout from '../content-layout';
 
 const mapStateToProps = state => ({
     id: state.theme.id,
@@ -39,18 +40,28 @@ const AppHeader = ({themeActions, id, type}: Props) => {
             >
                 {'Title'}
             </Typography>
-            <IconButton
-                href={null}
-                onClick={toggleThemeType}
+            <ContentLayout
+                direction={'row'}
             >
-                {
-                    isLightTheme
-                        ? <LightThemeIcon color={'action'}/>
-                        : <DarkThemeIcon color={'action'}/>
-                }
-            </IconButton>
+                <IconButton
+                    href={null}
+                    onClick={toggleThemeType}
+                >
+                    {
+                        isLightTheme
+                            ? <LightThemeIcon color={'action'}/>
+                            : <DarkThemeIcon color={'action'}/>
+                    }
+                </IconButton>
+                <IconButton
+                    href={null}
+                    onClick={() => null}
+                >
+                    <PaletteIcon/>
+                </IconButton>
+            </ContentLayout>
         </Header>
     );
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppHeader);

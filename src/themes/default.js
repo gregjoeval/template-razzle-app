@@ -5,9 +5,6 @@ import {THEME} from '../constants';
 
 const options = {
     themeName: THEME.DEFAULT_ID,
-    typography: {
-        useNextVariants: true
-    },
     palette: {
         type: THEME.LIGHT,
         primary: {
