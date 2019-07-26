@@ -1,6 +1,6 @@
 import {Brightness2 as DarkThemeIcon, Brightness6 as LightThemeIcon, Palette as PaletteIcon} from '@material-ui/icons';
-import React from 'react';
-import {IconButton, Typography} from '@material-ui/core';
+import React, {useState} from 'react';
+import {IconButton, Typography, Menu, MenuItem} from '@material-ui/core';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ThemeActions} from '../../actions';
@@ -29,6 +29,44 @@ const AppHeader = ({themeActions, id, type}: Props) => {
     const isLightTheme = type === THEME.LIGHT;
     const toggleThemeType = isLightTheme ? setDarkTheme : setLightTheme;
 
+    const [themeMenuAnchorEl, setThemeMenuAnchorEl] = useState(null);
+
+    const themeMenuId = 'theme-menu-id';
+    const openThemeMenu = (e) => setThemeMenuAnchorEl(e.currentTarget);
+    const closeThemeMenu = () => setThemeMenuAnchorEl(null);
+    const handleThemeMenuClick = (themeId) => () => {
+        if (id !== themeId) {
+            setThemeId(themeId);
+        }
+
+        closeThemeMenu();
+    };
+
+    const ThemeMenu = () => (
+        <Menu
+            anchorEl={themeMenuAnchorEl}
+            id={themeMenuId}
+            keepMounted={true}
+            onClose={closeThemeMenu}
+            open={Boolean(themeMenuAnchorEl)}
+        >
+            <MenuItem
+                button={true}
+                component={'li'}
+                onClick={handleThemeMenuClick(THEME.DEFAULT_ID)}
+            >
+                {THEME.DEFAULT_ID}
+            </MenuItem>
+            <MenuItem
+                button={true}
+                component={'li'}
+                onClick={handleThemeMenuClick(THEME.EXAMPLE_ID)}
+            >
+                {THEME.EXAMPLE_ID}
+            </MenuItem>
+        </Menu>
+    );
+
     return (
         <Header
             alignItems={'center'}
@@ -54,11 +92,14 @@ const AppHeader = ({themeActions, id, type}: Props) => {
                     }
                 </IconButton>
                 <IconButton
+                    aria-controls={themeMenuId}
+                    aria-haspopup={'true'}
                     href={null}
-                    onClick={() => console.log('hello')}
+                    onClick={openThemeMenu}
                 >
                     <PaletteIcon/>
                 </IconButton>
+                <ThemeMenu/>
             </ContentLayout>
         </Header>
     );
