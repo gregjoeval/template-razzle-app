@@ -11,13 +11,6 @@
     "test": "razzle test --env=jsdom",
     "flow": "flow"
   },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react",
-      "@babel/preset-flow"
-    ]
-  },
   "dependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
